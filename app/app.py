@@ -47,6 +47,3 @@ def scrapencdc():
     return jsonify({"data":{"NCDC_National_Info":data_res_national,"KD_state":data_res_state,"Hotline":{"phone1":"08035871662","phone2":"08025088304","phone3":"08032401473","phone4":"08037808191"},"Date":date.today()}})
 
 
-port = int(os.environ.get("PORT", 8080))
-if __name__ == '__main__':
-    app.run(threaded=True, host='0.0.0.0', port=port)
