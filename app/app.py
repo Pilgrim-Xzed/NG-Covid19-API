@@ -44,6 +44,6 @@ def scrapencdc():
       
     
 
-    return jsonify({"data":{"NCDC_National_Info":data_res_national,"KD_state":data_res_state,"Hotline":{"phone1":"08035871662","phone2":"08025088304","phone3":"08032401473","phone4":"08037808191"},"Date":date.today()}})
+    return jsonify({"data":{"NCDC_National_Info":data_res_national,"KD_state":data_res_state,"Hotline":["08035871662","08025088304","08032401473","08037808191"],"Date":date.today()}})
 
 
