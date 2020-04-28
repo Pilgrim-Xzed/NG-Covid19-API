@@ -8,7 +8,6 @@ click==7.1.2
 configparser==4.0.2
 enum34==1.1.10
 Flask==1.1.2
-futures==3.3.0
 gunicorn==19.10.0
 idna==2.9
 isort==4.3.21
