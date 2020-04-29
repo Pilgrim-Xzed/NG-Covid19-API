@@ -34,7 +34,7 @@ def scrapencdc():
     soup = BeautifulSoup(page, 'html.parser')
     ncdc_national_data = soup.find('table',{'id':'custom1'})
     ncdc_state_data = soup.find('table',{'id':'custom3'})
-    
+    statt = []
     data_res_national = {}
     data_res_national['date'] = str(date.today())
     data_res_state = {}
@@ -53,7 +53,10 @@ def scrapencdc():
            
             
 
-            
+    statistics = db.stats.find({})
+    for item in statistics:
+        statt.append(item)
+
                 
             
 
@@ -77,10 +80,7 @@ def scrapencdc():
     
     
 
-    return jsonify({"data":{"NCDC_National_Info":data_res_national,"KD_state":data_res_state,"Hotline":["08035871662","08025088304","08032401473","08037808191"],"Date":date.today()}})
+    return jsonify({"data":{"NCDC_National_Info":data_res_national,"KD_state":data_res_state,"Hotline":["08035871662","08025088304","08032401473","08037808191"],"Date":date.today(),"item":json.loads(json_util.dumps(statt))}})
 
 
 
-port = int(os.environ.get("PORT", 8080))
-if __name__ == '__main__':
-    app.run(threaded=True, host='0.0.0.0', port=port)
