@@ -6,7 +6,7 @@ from bson import json_util, ObjectId
 import json
 
 from datetime import date
-from urllib.request import urlopen
+from urllib.request import urlopen, Request
 import re
 import time
 
@@ -30,7 +30,9 @@ except:
 
 @app.route('/', methods=['GET', 'POST'])
 def scrapencdc():
-    page = urlopen(ncdc_url)
+    headers = {"User-Agent": "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.3"}
+    req = Request(url=ncdc_url, headers=headers) 
+    page = urlopen(req).read() 
     soup = BeautifulSoup(page, 'html.parser')
     ncdc_national_data = soup.find('table',{'id':'custom1'})
     ncdc_state_data = soup.find('table',{'id':'custom3'})
@@ -38,6 +40,7 @@ def scrapencdc():
     data_res_national = {}
     data_res_national['date'] = str(date.today())
     data_res_state = {}
+    
     
 
     for tr in ncdc_national_data.find_all('tr'):
@@ -81,6 +84,5 @@ def scrapencdc():
     
 
     return jsonify({"data":{"NCDC_National_Info":data_res_national,"KD_state":data_res_state,"Hotline":["08035871662","08025088304","08032401473","08037808191"],"Date":date.today(),"item":json.loads(json_util.dumps(statt))}})
-
 
 
