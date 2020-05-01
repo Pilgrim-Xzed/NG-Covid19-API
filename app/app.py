@@ -88,6 +88,6 @@ def scrapencdc():
     
       
 
-    return jsonify({"data":{"NCDC_National_Info":data_res_national,"i_by":30,"lock_down_start":str(date(2020,4,26)),"KD_state":data_res_state,"Hotline":["08035871662","08025088304","08032401473","08037808191"],"Date":date.today(),"item":json.loads(json_util.dumps(statt[::-1]))}})
+    return jsonify({"data":{"NCDC_National_Info":data_res_national,"i_by":30,"KD_state":data_res_state,"Hotline":["08035871662","08025088304","08032401473","08037808191"],"Date":date.today(),"item":json.loads(json_util.dumps(statt[::-1]))}})
 
 
