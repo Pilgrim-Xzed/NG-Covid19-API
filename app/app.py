@@ -55,7 +55,7 @@ def scrapencdc():
     data_res_national[re.sub("\n|>", " ",  discharged_cases.find('h6').text)] =re.sub("\n|>|,", "",  discharged_cases.find('h2').text.strip())
     data_res_national[re.sub("\n|>", " ",  deaths.find('h6').text)] =re.sub("\n|>|,", "", deaths.find('h2').text.strip())
     
-    if db.stats.find({"date":str(date.today())}).count() > 0:
+    if db.stats.find({"date":str(date.today()),"Confirmed Cases":data_res_national[re.sub("\n|>", " ",  confirmed_cases.find('h6').text)]}).count() > 0:
         db.stats.update_one({ "date": str(date.today()) },{"$set":json.loads(json_util.dumps(data_res_national))})
     else:
         db.stats.insert_one(json.loads(json_util.dumps(data_res_national)))
